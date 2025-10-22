@@ -1,7 +1,10 @@
 # Test tracker CLI
+
 ## Task tracker is a project used to track and manage your tasks.
+
 ### The user can:
-* Add, Update, and Delete tasks 
+
+* Add, Update, and Delete tasks
 * Mark a task as in progress or done
 * List all tasks
 * List all tasks that are done
@@ -9,7 +12,9 @@
 * List all tasks that are in progress
 
 ## Example
-The list of commands and their usage is given below:
+
+### The list of commands and their usage is given below:
+
 ```bash
 # Adding a new task
 task-cli add "Buy groceries"
