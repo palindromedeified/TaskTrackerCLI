@@ -5,17 +5,10 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-	"sync"
 	"time"
 )
 
 const path = "tasks.json"
-
-var (
-	once        sync.Once
-	cachedTasks []Task
-	readErr     error
-)
 
 type Task struct {
 	id          int
@@ -156,20 +149,16 @@ func getListTasksByStatus(status string) ([]Task, error) {
 }
 
 func readTasks() ([]Task, error) {
-	once.Do(func() {
-		data, err := readJSON()
-		if err != nil {
-			readErr = err
-			return
-		}
-		tasks, err := convertInTasks(data)
-		if err != nil {
-			readErr = err
-			return
-		}
-		cachedTasks = tasks
-	})
-	return cachedTasks, readErr
+	data, err := readJSON()
+	if err != nil {
+		return nil, err
+	}
+	tasks, err := convertInTasks(data)
+	if err != nil {
+		return nil, err
+	}
+
+	return tasks, nil
 }
 
 func writeTasks(tasks []Task) error {
